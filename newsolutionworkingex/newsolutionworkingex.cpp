@@ -1,66 +1,122 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
 using namespace std;
-class point {
-    int x, y;
+class auton {
+    string name;
+    int year;
+    int price;
+    double V;
 public:
-    point(int x, int y) {
-        this->x = x;
-        this->y = y;
+    auton() {
+        name = "none";
+        year = price = V = 0;
     }
-    point() {
-        x = y = 0;
+    auton(string name, int year, int price, double V) {
+        this->name = name;
+        this->price = price;
+        this->V = V;
+        this->year = year;
+    }
+    void setall() {
+        cout << "enter name";
+        cin >> name;
+        cout << "enter price";
+        cin >> price;
+        cout << "enter V";
+        cin >> V;
+        cout << "enter year";
+        cin >> year;
+
+
+    }
+    void setName(string name) {
+        this->name = name;
+    }
+    void setYear(int year) {
+        this->year = year;
+    }
+    void setV(double V) {
+        this->V = V;
+    }
+    void setPrice(int price) {
+        this->price = price;
+    }
+    string getName()const {
+        return name;
+    }
+    int getYear()const {
+        return year;
+    }
+    int getPrice()const {
+        return price;
+    }
+    double getV()const {
+        return V;
     }
     void print()const {
-        cout << "X:" << x << "Y:" << y;
+        cout << "Name :" << name << " Price : " << price << " V : " << V << " Year:" << year << "\n";
     }
 };
-class figura {
-    vector<point> vectors;
+class automagaz {
+    vector<auton> cars;
 public:
-    figura(vector<point> vectors) {
-        this->vectors = vectors;
+    automagaz(){ 
+        cars = { auton() };
     }
-    figura() {
-        this->vectors = { point(0,0) };
+    automagaz(vector<auton> cars) {
+        this->cars = cars;
     }
-     void print() {
-        for (int i = 0; i < vectors.size(); i++)
+    vector<auton> getcars()const {
+        return cars;
+    }
+    void print()const {
+        for (int i = 0; i < cars.size(); i++)
         {
-            vectors[i].print();
+            cars[i].print();
         }
     }
-};  
-class cvadrat : public figura  {
-public:
-    cvadrat() : figura(){}
-    cvadrat(vector<point> vectors) : figura(vectors){}
-   
-};
-class triengle : public figura {
-public:
-    triengle() :  figura() {}
-    triengle(vector<point> vectors) : figura(vectors) {}
-   
-};
-class trapesia :public  figura {
-public:
-    trapesia() : figura() {}
-    trapesia(vector<point> vectors) : figura(vectors) {}
+    
     
 };
-class pramokutnic : public figura {
-public:
-    pramokutnic() : figura() {}
-    pramokutnic(vector<point> vectors) : figura(vectors) {}
-   
-};
+void print(vector<auton> cars) {
+    for (int i = 0; i < cars.size(); i++)
+    {
+        cars[i].print();
+    }
+}
+bool operator>(auton a, auton b) {
+    return a.getPrice() > b.getPrice();
+}
+bool operator<(auton a, auton b) {
+    return a.getPrice() < b.getPrice();
+}
+bool operator>=(auton a, auton b) {
+    return a.getPrice() >= b.getPrice();
+}
+bool operator<=(auton a, auton b) {
+    return a.getPrice() <= b.getPrice();
+}
+bool operator==(auton a, auton b) {
+    return a.getPrice() == b.getPrice();
+}
 int main()
-{
-    cvadrat cv({ point(12, 3),        point(17, 3), point(12, -2), point(17, -2) });
-    triengle tr({  point(17, 3), point(12, -43), point(12, -3) });
-    pramokutnic pr({ point(22, 3),        point(27, 3), point(22, -4), point(27, -17) });
-    trapesia trap({ point(12, 3),        point(17, 3), point(12, -43), point(12, -3) });
+{   
     
+    vector<auton> cars ={
+        auton("Mazda" , 2020 , 3500 , 4.2) ,
+        auton("Porsh" , 2023 , 4400 , 5.7) ,
+        auton("Shkoda" , 2007 , 2200 , 2.2) 
+        };
+
+    print(cars);
+    sort(cars.begin(), cars.end());
+    [cars] {
+        for (int i = 0; i < cars.size(); i++)
+        {
+            cars[i].print();
+        }
+    };
 }
