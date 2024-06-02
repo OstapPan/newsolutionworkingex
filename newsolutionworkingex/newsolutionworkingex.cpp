@@ -15,9 +15,12 @@ public:
 };
 class figura {
     vector<point> vectors;
-    
+public:
+    figura(vector<point> vectors) {
+        this->vectors = vectors;
+    }
 };
 int main()
 {
-    std::cout << "Hello World!\n";
+    
 }
